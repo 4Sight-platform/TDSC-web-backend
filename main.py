@@ -12,6 +12,9 @@ from tracing import RequestIdMiddleware
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Immediate startup log
+print("--- TDSC BACKEND STARTING UP ---", flush=True)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
