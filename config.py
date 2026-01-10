@@ -12,11 +12,5 @@ JWT_SECRET = os.getenv("JWT_SECRET", "tdsc_super_secret_key_change_in_production
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440"))
 
-# CORS Origins (allow frontend)
-CORS_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174",
-    "https://tdsc-new-approach-frontend.vercel.app",
-]
+# CORS Origins (allow all for now, restrict in production)
+CORS_ORIGINS = ["*"]
