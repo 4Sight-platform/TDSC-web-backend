@@ -1,0 +1,21 @@
+# Render.com deployment configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: tdsc-backend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URL
+        sync: false  # Set manually in dashboard
+      - key: MONGODB_DB_NAME
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.11.0"
