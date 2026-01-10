@@ -12,10 +12,14 @@ services:
     healthCheckPath: /health
     envVars:
       - key: MONGODB_URL
-        sync: false  # Set manually in dashboard
+        value: "mongodb+srv://4sightplatform_db_user:2005@cluster0.1hybwum.mongodb.net/?appName=Cluster0"
       - key: MONGODB_DB_NAME
-        sync: false
+        value: "TDSC"
       - key: JWT_SECRET
-        sync: false
+        value: "tdsc_super_secret_key_change_in_production_2024"
+      - key: JWT_ALGORITHM
+        value: "HS256"
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
       - key: PYTHON_VERSION
         value: "3.11.0"
