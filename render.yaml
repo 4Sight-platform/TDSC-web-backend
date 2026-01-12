@@ -7,19 +7,21 @@ services:
     runtime: python
     region: oregon
     plan: free
+    branch: main
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
+    autoDeploy: true
     envVars:
       - key: MONGODB_URL
-        value: "mongodb+srv://4sightplatform_db_user:2005@cluster0.1hybwum.mongodb.net/?appName=Cluster0"
+        sync: false
       - key: MONGODB_DB_NAME
         value: "TDSC"
       - key: JWT_SECRET
-        value: "tdsc_super_secret_key_change_in_production_2024"
+        sync: false
       - key: JWT_ALGORITHM
         value: "HS256"
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "1440"
       - key: PYTHON_VERSION
-        value: "3.11.0"
+        value: "3.11.6"
