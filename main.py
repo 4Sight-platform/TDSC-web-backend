@@ -2,19 +2,17 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
+import os
+import uvicorn
 
 from config import CORS_ORIGINS
 from database import initialize_collections, get_mongo_client
-from routes import auth, engagement
+from routes import auth, contact, engagement
 from tracing import RequestIdMiddleware
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Immediate startup log
-print("--- TDSC BACKEND STARTING UP ---", flush=True)
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -58,6 +56,7 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router)
 app.include_router(engagement.router)
+app.include_router(contact.router)
 
 
 @app.get("/")
@@ -75,3 +74,9 @@ def root():
 def health():
     """Health check endpoint"""
     return {"status": "ok"}
+
+
+if __name__ == "__main__":
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run("main:app", host=host, port=port)
